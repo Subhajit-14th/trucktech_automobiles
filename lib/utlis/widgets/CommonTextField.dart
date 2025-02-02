@@ -3,7 +3,10 @@ import 'package:trucktech_automobiles/utlis/assets/app_colors.dart';
 
 class CommonTextField extends StatelessWidget {
   const CommonTextField(
-      {super.key, required this.labelText, required this.hintText, required this.controller});
+      {super.key,
+      required this.labelText,
+      required this.hintText,
+      required this.controller});
 
   final TextEditingController controller;
   final String labelText;
@@ -26,6 +29,7 @@ class CommonTextField extends StatelessWidget {
         labelStyle: const TextStyle(
           color: AppColor.textColor,
         ),
+        floatingLabelBehavior: FloatingLabelBehavior.never,
         focusColor: AppColor.textColor,
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),

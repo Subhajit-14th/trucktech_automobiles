@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../services/depency_services.dart';
@@ -27,7 +26,7 @@ class AuthProvider with ChangeNotifier {
   }
 
   /// For login
-  Future<void> login({required String email,required String password}) async {
+  Future<void> login({required String email, required String password}) async {
     _isAuthenticated = true;
     Future.delayed(const Duration(seconds: 2), () {
       _isAuthenticated = false;

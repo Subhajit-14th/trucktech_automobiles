@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:multi_select_flutter/dialog/multi_select_dialog_field.dart';
-import 'package:multi_select_flutter/util/multi_select_item.dart';
 import 'package:trucktech_automobiles/utlis/assets/app_colors.dart';
 import 'package:trucktech_automobiles/utlis/widgets/CommonButton.dart';
-import 'package:trucktech_automobiles/utlis/widgets/CommonTextField.dart';
+import 'package:trucktech_automobiles/view/Dashboard/AddVehicles/basic_details_form_one.dart';
+import 'package:trucktech_automobiles/view/Dashboard/AddVehicles/basic_details_form_three.dart';
+import 'package:trucktech_automobiles/view/Dashboard/AddVehicles/basic_details_form_two.dart';
 
 class AddVehiclesScreen extends StatefulWidget {
   const AddVehiclesScreen({super.key});
@@ -15,41 +15,12 @@ class AddVehiclesScreen extends StatefulWidget {
 class _AddVehiclesScreenState extends State<AddVehiclesScreen> {
   int _currentStep = 0;
 
-  TextEditingController _dateOfInwardController = TextEditingController();
-  TextEditingController _vehicleNoController = TextEditingController();
-  String? selectdAccident;
-  List<String> dropdownValuesOfAccident = [
-    'PAID',
-    'AMC',
-    'EWP',
-    'WARRANTY',
-    'INSURANCE'
-  ];
-  TextEditingController _driverVoiceController = TextEditingController();
-
-  final List<String> dropdownMechanicsName = [
-    "Mechanic A",
-    "Mechanic B",
-    "Mechanic C",
-    "Mechanic D",
-    "Mechanic E",
-    "Mechanic F",
-  ];
-  List<String> _selectedMechanicsNames = [];
-
-  String? _selectedType;
-  List<String> dropdownTypes = [
-    'WORKSHOP',
-    'BREAKDOWN',
-    'ACCIDENTAL',
-    'AT-SITE'
-  ];
-
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
+      backgroundColor: AppColor.itemsColor,
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
@@ -63,281 +34,58 @@ class _AddVehiclesScreenState extends State<AddVehiclesScreen> {
             end: Alignment.bottomCenter,
           ),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: MediaQuery.of(context).size.height * 0.04),
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: MediaQuery.of(context).size.height * 0.04),
 
-            /// Custom Stepper Row
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 20.0, horizontal: 32),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  _buildStepCircle(0),
-                  _buildStepDivider(),
-                  _buildStepCircle(1),
-                ],
+              /// Custom Stepper Row
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 20.0, horizontal: 32),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    _buildStepCircle(0),
+                    _buildStepDivider(),
+                    _buildStepCircle(1),
+                    _buildStepDivider(),
+                    _buildStepCircle(2),
+                  ],
+                ),
               ),
-            ),
 
-            /// Forms
-            /// Date of Inward
-            Padding(
-              padding: const EdgeInsets.only(left: 16, right: 16),
-              child: Text(
-                'Date of Inward',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            SizedBox(height: height * 0.01),
-            Padding(
-              padding: const EdgeInsets.only(left: 16, right: 16),
-              child: CommonTextField(
-                controller: _dateOfInwardController,
-                labelText: 'Date of Inward',
-                hintText: 'Enter your date of Inward...',
-              ),
-            ),
-            SizedBox(height: height * 0.02),
-
-            /// Vehicle No
-            Padding(
-              padding: const EdgeInsets.only(left: 16, right: 16),
-              child: Text(
-                'Vehicle No',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            SizedBox(height: height * 0.01),
-            Padding(
-              padding: const EdgeInsets.only(left: 16, right: 16),
-              child: CommonTextField(
-                controller: _dateOfInwardController,
-                labelText: 'Vehicle No',
-                hintText: 'Enter your date of Inward...',
-              ),
-            ),
-            SizedBox(height: height * 0.02),
-
-            /// Accidental No
-            Padding(
-              padding: const EdgeInsets.only(left: 16, right: 16),
-              child: Text(
-                'Accidental No',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            SizedBox(height: height * 0.01),
-            Container(
-              margin: EdgeInsets.only(left: 16, right: 16),
-              height: 55,
-              decoration: BoxDecoration(
-                color: Colors.transparent,
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(
-                  color: AppColor.textColor.withAlpha(100),
-                ),
-              ),
-              child: DropdownButtonHideUnderline(
-                child: DropdownButton<String>(
-                  padding: EdgeInsets.only(left: 14, right: 14),
-                  value: selectdAccident,
-                  hint: Text(
-                    selectdAccident ?? 'Choose one',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                    ),
-                  ),
-                  isExpanded: true,
-                  items: dropdownValuesOfAccident.map((String item) {
-                    return DropdownMenuItem<String>(
-                      value: item,
-                      child: Text(
-                        item,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                        ),
-                      ),
-                    );
-                  }).toList(),
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      selectdAccident = newValue; // Update the selected value
-                    });
-                    print("Selected: $selectdAccident");
-                  },
-                ),
-              ),
-            ),
-            SizedBox(height: height * 0.02),
-
-            /// Driver Voice
-            Padding(
-              padding: const EdgeInsets.only(left: 16, right: 16),
-              child: Text(
-                'Driver voice',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            SizedBox(height: height * 0.01),
-            Padding(
-              padding: const EdgeInsets.only(left: 16, right: 16),
-              child: CommonTextField(
-                controller: _driverVoiceController,
-                labelText: 'Driver voice',
-                hintText: 'Enter your date of Inward...',
-              ),
-            ),
-            SizedBox(height: height * 0.02),
-
-            /// Mechanics attending the vehicle
-            Padding(
-              padding: const EdgeInsets.only(left: 16, right: 16),
-              child: Text(
-                'Mechanics Attending The Vehicle',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            SizedBox(height: height * 0.01),
-            Container(
-              margin: EdgeInsets.only(left: 16, right: 16),
-              decoration: BoxDecoration(
-                color: Colors.transparent,
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(
-                  color: Colors.grey.withAlpha(100),
-                ),
-              ),
-              child: MultiSelectDialogField(
-                items: dropdownMechanicsName
-                    .map((mechanic) =>
-                        MultiSelectItem<String>(mechanic, mechanic))
-                    .toList(),
-                initialValue: _selectedMechanicsNames,
-                title: Text("Select Mechanics"),
-                dialogHeight: height * 0.3,
-                selectedColor: AppColor.secondaryColor,
-                decoration: BoxDecoration(
-                  color: Colors.transparent,
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(
-                    color: Colors.grey.withAlpha(100),
-                  ),
-                ),
-                buttonText: Text(
-                  "Choose one or more",
-                  style: TextStyle(color: Colors.white, fontSize: 14),
-                ),
-                onConfirm: (results) {
+              /// Froms
+              _currentStep == 0
+                  ? BasicDetailsFromOne()
+                  : _currentStep == 1
+                      ? BasicDetailsFromTwo()
+                      : BasicDetailsFormThree(),
+              SizedBox(height: height * 0.02),
+            ],
+          ),
+        ),
+      ),
+      bottomNavigationBar: Container(
+        margin: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
+        decoration: BoxDecoration(
+          color: AppColor.subItemColor,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: CommonButton(
+          width: width / 1,
+          height: height * 0.06,
+          buttonText: _currentStep == 2 ? 'Submit' : 'Next',
+          onTap: _currentStep == 2
+              ? () {}
+              : () {
                   setState(() {
-                    _selectedMechanicsNames = results.cast<String>();
+                    _currentStep++;
                   });
-                  print("Selected Mechanics: $_selectedMechanicsNames");
                 },
-              ),
-            ),
-            SizedBox(height: height * 0.02),
-
-            /// Type
-            Padding(
-              padding: const EdgeInsets.only(left: 16, right: 16),
-              child: Text(
-                'Type',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            SizedBox(height: height * 0.01),
-            Container(
-              margin: EdgeInsets.only(left: 16, right: 16),
-              height: 55,
-              decoration: BoxDecoration(
-                color: Colors.transparent,
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(
-                  color: AppColor.textColor.withAlpha(100),
-                ),
-              ),
-              child: DropdownButtonHideUnderline(
-                child: DropdownButton<String>(
-                  padding: EdgeInsets.only(left: 14, right: 14),
-                  value: _selectedType,
-                  hint: Text(
-                    _selectedType ?? 'Choose one',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                    ),
-                  ),
-                  isExpanded: true,
-                  items: dropdownTypes.map((String item) {
-                    return DropdownMenuItem<String>(
-                      value: item,
-                      child: Text(
-                        item,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 14,
-                        ),
-                      ),
-                    );
-                  }).toList(),
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      _selectedType = newValue; // Update the selected value
-                    });
-                    print("Selected: $_selectedType");
-                  },
-                ),
-              ),
-            ),
-            SizedBox(height: height * 0.02),
-
-            /// Common button
-            Container(
-              margin: EdgeInsets.only(left: 16, right: 16),
-              child: CommonButton(
-                width: width / 1,
-                height: height * 0.06,
-                buttonText: 'Sign in',
-                onTap: _currentStep == 1
-                    ? () {}
-                    : () {
-                        setState(() {
-                          _currentStep++;
-                        });
-                      },
-              ),
-            ),
-          ],
         ),
       ),
     );

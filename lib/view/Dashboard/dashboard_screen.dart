@@ -1,12 +1,7 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:trucktech_automobiles/utlis/assets/app_colors.dart';
 import 'package:trucktech_automobiles/utlis/widgets/animatedContainerWithRowColumnAnimation.dart';
 import 'package:trucktech_automobiles/utlis/widgets/downToUpPageRoute.dart';
 import 'package:trucktech_automobiles/view/Dashboard/AddVehicles/add_vehicles_screen.dart';
-import 'package:trucktech_automobiles/viewModel/home_provider.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});

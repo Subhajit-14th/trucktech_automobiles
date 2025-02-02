@@ -143,26 +143,19 @@ class _LoginScreenState extends State<LoginScreen> {
                         ],
                       ),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          InkWell(
-                              onTap: () {
-                                authProvider.setTabIndex(0);
-                              },
-                              child:
-                                  tabForUserType(tabName: 'Admin', index: 0)),
-                          InkWell(
-                              onTap: () {
-                                authProvider.setTabIndex(1);
-                              },
+                          Expanded(
                               child: tabForUserType(
-                                  tabName: 'Supervisor', index: 1)),
-                          InkWell(
-                              onTap: () {
-                                authProvider.setTabIndex(2);
-                              },
+                                  tabName: 'Supervisor', index: 0)),
+                          Expanded(
                               child: tabForUserType(
-                                  tabName: 'Mechanic', index: 2)),
+                                  tabName: 'Mechanic', index: 1)),
+                          // InkWell(
+                          //     onTap: () {
+                          //       authProvider.setTabIndex(2);
+                          //     },
+                          //     child: tabForUserType(
+                          //         tabName: 'Mechanic', index: 2)),
                         ],
                       ),
                     ),
@@ -238,23 +231,29 @@ class _LoginScreenState extends State<LoginScreen> {
         debugPrint('My index is: ${authProvider.tabIndex}');
         final isSelected = authProvider.tabIndex == index;
 
-        return AnimatedContainer(
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeInOut,
-          padding: const EdgeInsets.all(14),
-          decoration: BoxDecoration(
-            color: isSelected ? AppColor.secondaryColor : Colors.transparent,
-            borderRadius: BorderRadius.circular(14),
-          ),
-          child: AnimatedScale(
-            scale: isSelected ? 1.1 : 1.0,
+        return GestureDetector(
+          onTap: () => authProvider.setTabIndex(index),
+          child: AnimatedContainer(
             duration: const Duration(milliseconds: 300),
-            child: Text(
-              tabName,
-              style: const TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w600,
-                fontFamily: 'RobotoCondensed',
+            curve: Curves.easeInOut,
+            padding: const EdgeInsets.symmetric(vertical: 12),
+            margin: EdgeInsets.symmetric(vertical: 14, horizontal: 14),
+            decoration: BoxDecoration(
+              color: isSelected ? AppColor.secondaryColor : Colors.transparent,
+              borderRadius: BorderRadius.circular(14),
+            ),
+            child: AnimatedScale(
+              scale: isSelected ? 1.1 : 1.0,
+              duration: const Duration(milliseconds: 300),
+              child: Center(
+                child: Text(
+                  tabName,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                    fontFamily: 'RobotoCondensed',
+                  ),
+                ),
               ),
             ),
           ),
