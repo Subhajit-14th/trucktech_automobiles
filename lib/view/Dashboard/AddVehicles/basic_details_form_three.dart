@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:trucktech_automobiles/utlis/widgets/CommonTextField.dart';
+import 'package:trucktech_automobiles/view/Dashboard/AddVehicles/AtSiteWork/at_site_work_field_screen.dart';
+import 'package:trucktech_automobiles/view/Dashboard/AddVehicles/BreakDown/breakdown_field_screen.dart';
+import 'package:trucktech_automobiles/view/Dashboard/AddVehicles/WorkShop/workshop_field_screen.dart';
 import 'package:trucktech_automobiles/viewModel/add_vehicle_provider.dart';
 
 class BasicDetailsFormThree extends StatelessWidget {
@@ -26,28 +28,13 @@ class BasicDetailsFormThree extends StatelessWidget {
         ),
         SizedBox(height: height * 0.01),
 
-        /// Job card no
-        Padding(
-          padding: const EdgeInsets.only(left: 16, right: 16),
-          child: Text(
-            'Job Card No',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        SizedBox(height: height * 0.01),
-        Padding(
-          padding: const EdgeInsets.only(left: 16, right: 16),
-          child: CommonTextField(
-            controller: context.read<AddVehicleProvider>().jobCardNoController,
-            labelText: 'Job Card No',
-            hintText: 'Enter your jpb card no...',
-          ),
-        ),
-        SizedBox(height: height * 0.02),
+        context.read<AddVehicleProvider>().selectedType == "WORKSHOP"
+            ? WorkshopFieldScreen()
+            : context.read<AddVehicleProvider>().selectedType == "BREAKDOWN"
+                ? BreakdownFieldScreen()
+                : context.read<AddVehicleProvider>().selectedType == "AT-SITE"
+                    ? AtSiteWorkFieldScreen()
+                    : Container(),
       ],
     );
   }

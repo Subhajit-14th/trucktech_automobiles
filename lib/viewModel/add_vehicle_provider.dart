@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:trucktech_automobiles/model/AddVehicles/basic_details_claimNo_Amount_Model.dart';
 
 class AddVehicleProvider with ChangeNotifier {
   final TextEditingController _dateOfInwardController = TextEditingController();
@@ -122,4 +123,62 @@ class AddVehicleProvider with ChangeNotifier {
   //// --------------------- Form 3 ---------------------
   final TextEditingController _jobCardNoController = TextEditingController();
   TextEditingController get jobCardNoController => _jobCardNoController;
+
+  /// --------------------- WorkShop Selection -------------------------
+  final List<BasicDetailsClaimnoAmountModel> _claimNoAndAmountItems = [
+    BasicDetailsClaimnoAmountModel(
+      claimNoController: TextEditingController(),
+      amountController: TextEditingController(),
+      indicatior: "main",
+    ),
+  ];
+  List<BasicDetailsClaimnoAmountModel> get claimNoAndAmountItems =>
+      _claimNoAndAmountItems;
+
+  // Method to add a new item
+  void addClaimNoAndAmountItem() {
+    _claimNoAndAmountItems.add(
+      BasicDetailsClaimnoAmountModel(
+        claimNoController: TextEditingController(),
+        amountController: TextEditingController(),
+        indicatior: "notMain",
+      ),
+    );
+    notifyListeners(); // Notify the UI about the change
+  }
+
+  // method to remove the index item from the list
+  void removeClaimNoAndAmountItem(index) {
+    _claimNoAndAmountItems.removeAt(index);
+    notifyListeners();
+  }
+
+  final TextEditingController _labourAmountController = TextEditingController();
+  TextEditingController get labourAmountController => _labourAmountController;
+
+  final TextEditingController _partsAmountController = TextEditingController();
+  TextEditingController get partsAmountController => _partsAmountController;
+
+  String? _vendorWork;
+  String? get vendorWork => _vendorWork;
+
+  final List<String> _vendorWorkValue = ['Yes', 'No'];
+  List<String> get vendorWorkValue => _vendorWorkValue;
+
+  /// set service type
+  void setVendorWorkValue(String vendorWork) {
+    _vendorWork = vendorWork;
+    notifyListeners();
+  }
+
+  final TextEditingController _vendorBillNoController = TextEditingController();
+  TextEditingController get vendorBillNoController => _vendorBillNoController;
+
+  final TextEditingController _vendorAmountController = TextEditingController();
+  TextEditingController get vendorAmountController => _vendorAmountController;
+
+  final TextEditingController _deputationChargesController =
+      TextEditingController();
+  TextEditingController get deputationChargesController =>
+      _deputationChargesController;
 }
