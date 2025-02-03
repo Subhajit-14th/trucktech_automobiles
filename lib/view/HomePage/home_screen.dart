@@ -19,6 +19,8 @@ class HomeScreen extends StatelessWidget {
               AppColor.secondaryColor,
               AppColor.itemsColor,
             ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
           ),
         ),
         child: Row(
@@ -27,7 +29,9 @@ class HomeScreen extends StatelessWidget {
               return AnimatedContainer(
                 duration: Duration(milliseconds: 400),
                 margin: EdgeInsets.symmetric(
-                    vertical: value.showMenu ? MediaQuery.of(context).size.height / 13 : MediaQuery.of(context).size.height / 13),
+                    vertical: value.showMenu
+                        ? MediaQuery.of(context).size.height / 13
+                        : MediaQuery.of(context).size.height / 13),
                 width: value.showMenu ? 210 : 80,
                 decoration: BoxDecoration(
                   color: Colors.black.withAlpha(80),
@@ -44,16 +48,17 @@ class HomeScreen extends StatelessWidget {
                     /// Icon button
                     InkWell(
                       onTap: () {
-                        if(value.showMenu && value.isRenderText) {
-                          value.setShowRenderText(isRenderText: !value.isRenderText);
+                        if (value.showMenu && value.isRenderText) {
+                          value.setShowRenderText(
+                              isRenderText: !value.isRenderText);
                           value.setShowMenu(showMenu: !value.showMenu);
                         } else {
                           value.setShowMenu(showMenu: !value.showMenu);
                           Future.delayed(Duration(milliseconds: 500), () {
-                            value.setShowRenderText(isRenderText: !value.isRenderText);
+                            value.setShowRenderText(
+                                isRenderText: !value.isRenderText);
                           });
                         }
-
                       },
                       child: Padding(
                         padding: EdgeInsets.only(right: 18),
@@ -68,72 +73,54 @@ class HomeScreen extends StatelessWidget {
                     SizedBox(height: 40),
 
                     /// Home Button
-                    menuButtons(
-                        icon: Icons.home_outlined,
-                        label: 'Dashboard'
-                    ),
+                    menuButtons(icon: Icons.home_outlined, label: 'Dashboard'),
                     SizedBox(height: 20),
 
                     /// Insurance button
                     menuButtons(
                         icon: Icons.insert_drive_file_outlined,
-                        label: 'Insurance'
-                    ),
+                        label: 'Insurance'),
                     SizedBox(height: 20),
 
                     /// Driver Button
                     menuButtons(
-                        icon: Icons.people_alt_outlined,
-                        label: 'Driver'
-                    ),
+                        icon: Icons.people_alt_outlined, label: 'Driver'),
                     SizedBox(height: 20),
 
                     /// Vehicles Button
                     menuButtons(
-                        icon: Icons.directions_car_outlined,
-                        label: 'Vehicles'
-                    ),
+                        icon: Icons.directions_car_outlined, label: 'Vehicles'),
                     SizedBox(height: 20),
 
                     /// Credentials Button
-                    menuButtons(
-                        icon: Icons.file_present,
-                        label: 'Credentials'
-                    ),
+                    menuButtons(icon: Icons.file_present, label: 'Credentials'),
                     SizedBox(height: 20),
 
                     /// Authorizations Button
                     menuButtons(
                         icon: Icons.verified_user_outlined,
-                        label: 'Authorizations'
-                    ),
+                        label: 'Authorizations'),
                     SizedBox(height: 20),
 
                     /// Issues Button
                     menuButtons(
-                        icon: Icons.info_outline_rounded,
-                        label: 'Issues'
-                    ),
+                        icon: Icons.info_outline_rounded, label: 'Issues'),
                     SizedBox(height: 20),
 
                     /// Trip requests Button
                     menuButtons(
                         icon: Icons.location_on_outlined,
-                        label: 'Trip requests'
-                    ),
+                        label: 'Trip requests'),
                     SizedBox(height: 20),
 
                     /// Open trips Button
-                    menuButtons(
-                        icon: Icons.map_outlined,
-                        label: 'Open trips'
-                    ),
+                    menuButtons(icon: Icons.map_outlined, label: 'Open trips'),
                     SizedBox(height: 20),
                   ],
                 ),
               );
             }),
-            SizedBox(width: 10),
+            SizedBox(width: 16),
             Expanded(
               child: DashboardScreen(),
             ),
@@ -144,54 +131,59 @@ class HomeScreen extends StatelessWidget {
   }
 
   /// Buttons
-  Widget menuButtons({required IconData icon,required String label}) {
-    return Consumer<HomeProvider>(
-      builder: (context, value, child) {
-        bool isSelected = value.selectedMenu == label;
-        return InkWell(
-          onTap: () {
-            value.setSelectedMenu(label);
-          },
-          child: Container(
-            margin: EdgeInsets.only(left: value.showMenu ? 18 : 18 ,right: 18),
-            padding: EdgeInsets.only(top: 8, bottom: 8, left: value.showMenu ? isSelected ? 10 : 0 : 0),
-            decoration: BoxDecoration(
-              color: isSelected ? AppColor.secondaryColor : Colors.transparent,
-              borderRadius: BorderRadius.circular(100),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  icon,
-                  color: Colors.white,
-                  size: 28,
-                ),
-                SizedBox(width: value.isRenderText ? 8 : 0),
-                AnimatedOpacity(
-                  duration: Duration(seconds: 1),
-                  curve: Curves.easeInBack,
-                  opacity: value.isRenderText ? 1.0 : 0.0,
-                  child: SizedBox(
-                    width: value.isRenderText ? 120 : 0,
-                    child: Text(
-                      label,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        fontFamily: 'Lato',
-                      ),
-                      overflow: TextOverflow.fade,
-                      softWrap: false,
+  Widget menuButtons({required IconData icon, required String label}) {
+    return Consumer<HomeProvider>(builder: (context, value, child) {
+      bool isSelected = value.selectedMenu == label;
+      return InkWell(
+        onTap: () {
+          value.setSelectedMenu(label);
+        },
+        child: Container(
+          margin: EdgeInsets.only(left: value.showMenu ? 18 : 18, right: 18),
+          padding: EdgeInsets.only(
+              top: 8,
+              bottom: 8,
+              left: value.showMenu
+                  ? isSelected
+                      ? 10
+                      : 0
+                  : 0),
+          decoration: BoxDecoration(
+            color: isSelected ? AppColor.secondaryColor : Colors.transparent,
+            borderRadius: BorderRadius.circular(100),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                icon,
+                color: Colors.white,
+                size: 28,
+              ),
+              SizedBox(width: value.isRenderText ? 8 : 0),
+              AnimatedOpacity(
+                duration: Duration(seconds: 1),
+                curve: Curves.easeInBack,
+                opacity: value.isRenderText ? 1.0 : 0.0,
+                child: SizedBox(
+                  width: value.isRenderText ? 120 : 0,
+                  child: Text(
+                    label,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      fontFamily: 'Lato',
                     ),
+                    overflow: TextOverflow.fade,
+                    softWrap: false,
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-        );
-      }
-    );
+        ),
+      );
+    });
   }
 }

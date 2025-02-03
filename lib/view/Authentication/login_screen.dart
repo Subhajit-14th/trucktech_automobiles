@@ -40,43 +40,45 @@ class _LoginScreenState extends State<LoginScreen> {
             children: [
               SizedBox(height: height * 0.06),
 
-              // /// App Heading Section
-              // Row(
-              //   children: [
-              //     IconButton(
-              //       onPressed: () {},
-              //       icon: const Icon(
-              //         Icons.arrow_back_ios_new_rounded,
-              //         color: Colors.white,
-              //       ),
-              //     ),
-              //     const Spacer(),
-              //     const Text(
-              //       'Don\'t have an account?',
-              //       style: TextStyle(
-              //         color: AppColor.textColor,
-              //       ),
-              //     ),
-              //     Container(
-              //       height: 50,
-              //       width: 100,
-              //       margin: EdgeInsets.only(left: 14, right: width / 20),
-              //       decoration: BoxDecoration(
-              //         color: AppColor.itemsColor,
-              //         borderRadius: BorderRadius.circular(14),
-              //       ),
-              //       child: const Center(
-              //         child: Text(
-              //           'Get Started',
-              //           style: TextStyle(
-              //             color: AppColor.textColor,
-              //           ),
-              //         ),
-              //       ),
-              //     ),
-              //   ],
-              // ),
-              // SizedBox(height: height * 0.04),
+              /// App Heading Section
+              Row(
+                children: [
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.arrow_back_ios_new_rounded,
+                      color: Colors.white,
+                    ),
+                  ),
+                  const Spacer(),
+                  const Text(
+                    'Don\'t have an account?',
+                    style: TextStyle(
+                      color: AppColor.textColor,
+                      fontFamily: 'Lato',
+                    ),
+                  ),
+                  Container(
+                    height: 50,
+                    width: 100,
+                    margin: EdgeInsets.only(left: 14, right: width / 28),
+                    decoration: BoxDecoration(
+                      color: AppColor.itemsColor,
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                    child: const Center(
+                      child: Text(
+                        'Get Started',
+                        style: TextStyle(
+                          color: AppColor.textColor,
+                          fontFamily: 'Lato',
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: height * 0.04),
 
               /// App Heading
               const Text(
@@ -88,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   fontFamily: 'RobotoCondensed',
                 ),
               ),
-              SizedBox(height: height * 0.08),
+              SizedBox(height: height * 0.1),
 
               /// Login Container
               Container(
@@ -113,7 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                     /// Login heading
                     const Text(
-                      'Welcome back 👋',
+                      'Welcome back ',
                       textAlign: TextAlign.start,
                       style: TextStyle(
                         color: AppColor.textColor,
@@ -141,26 +143,19 @@ class _LoginScreenState extends State<LoginScreen> {
                         ],
                       ),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          InkWell(
-                              onTap: () {
-                                authProvider.setTabIndex(0);
-                              },
-                              child:
-                                  tabForUserType(tabName: 'Admin', index: 0)),
-                          InkWell(
-                              onTap: () {
-                                authProvider.setTabIndex(1);
-                              },
+                          Expanded(
                               child: tabForUserType(
-                                  tabName: 'Supervisor', index: 1)),
-                          InkWell(
-                              onTap: () {
-                                authProvider.setTabIndex(2);
-                              },
+                                  tabName: 'Supervisor', index: 0)),
+                          Expanded(
                               child: tabForUserType(
-                                  tabName: 'Mechanic', index: 2)),
+                                  tabName: 'Mechanic', index: 1)),
+                          // InkWell(
+                          //     onTap: () {
+                          //       authProvider.setTabIndex(2);
+                          //     },
+                          //     child: tabForUserType(
+                          //         tabName: 'Mechanic', index: 2)),
                         ],
                       ),
                     ),
@@ -192,8 +187,13 @@ class _LoginScreenState extends State<LoginScreen> {
                               height: height * 0.06,
                               buttonText: 'Sign in',
                               onTap: () {
-                                authProvider.login(email: _emailController.text, password: _passwordController.text);
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+                                authProvider.login(
+                                    email: _emailController.text,
+                                    password: _passwordController.text);
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => HomeScreen()));
                               },
                             );
                     }),
@@ -231,23 +231,29 @@ class _LoginScreenState extends State<LoginScreen> {
         debugPrint('My index is: ${authProvider.tabIndex}');
         final isSelected = authProvider.tabIndex == index;
 
-        return AnimatedContainer(
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeInOut,
-          padding: const EdgeInsets.all(14),
-          decoration: BoxDecoration(
-            color: isSelected ? AppColor.secondaryColor : Colors.transparent,
-            borderRadius: BorderRadius.circular(14),
-          ),
-          child: AnimatedScale(
-            scale: isSelected ? 1.1 : 1.0,
+        return GestureDetector(
+          onTap: () => authProvider.setTabIndex(index),
+          child: AnimatedContainer(
             duration: const Duration(milliseconds: 300),
-            child: Text(
-              tabName,
-              style: const TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w600,
-                fontFamily: 'RobotoCondensed',
+            curve: Curves.easeInOut,
+            padding: const EdgeInsets.symmetric(vertical: 12),
+            margin: EdgeInsets.symmetric(vertical: 14, horizontal: 14),
+            decoration: BoxDecoration(
+              color: isSelected ? AppColor.secondaryColor : Colors.transparent,
+              borderRadius: BorderRadius.circular(14),
+            ),
+            child: AnimatedScale(
+              scale: isSelected ? 1.1 : 1.0,
+              duration: const Duration(milliseconds: 300),
+              child: Center(
+                child: Text(
+                  tabName,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                    fontFamily: 'RobotoCondensed',
+                  ),
+                ),
               ),
             ),
           ),

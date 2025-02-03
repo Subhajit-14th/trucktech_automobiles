@@ -7,7 +7,8 @@ class CommonButton extends StatefulWidget {
     super.key,
     required this.width,
     required this.buttonText,
-    this.height, this.onTap,
+    this.height,
+    this.onTap,
   });
 
   final double width;
@@ -38,6 +39,7 @@ class _CommonButtonState extends State<CommonButton> {
               color: AppColor.textColor,
               fontSize: 18,
               fontWeight: FontWeight.w500,
+              fontFamily: 'Lato',
             ),
           ),
         ),
