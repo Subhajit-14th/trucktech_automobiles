@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:multi_select_flutter/dialog/multi_select_dialog_field.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
 import 'package:provider/provider.dart';
 import 'package:trucktech_automobiles/utlis/assets/app_colors.dart';
 import 'package:trucktech_automobiles/utlis/widgets/CommonTextField.dart';
+import 'package:trucktech_automobiles/utlis/widgets/common_image_picker_model.dart';
 import 'package:trucktech_automobiles/viewModel/add_vehicle_provider.dart';
 
 class BasicDetailsFromOne extends StatelessWidget {
@@ -17,17 +19,7 @@ class BasicDetailsFromOne extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         /// Date of Inward
-        Padding(
-          padding: const EdgeInsets.only(left: 16, right: 16),
-          child: Text(
-            'Date of Inward',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
+        buildHeading(heading: 'Date of Inward'),
         SizedBox(height: height * 0.01),
         Padding(
           padding: const EdgeInsets.only(left: 16, right: 16),
@@ -35,22 +27,25 @@ class BasicDetailsFromOne extends StatelessWidget {
             controller: addVehicleProvider.dateOfInwardController,
             labelText: 'Date of Inward',
             hintText: 'Enter your date of Inward...',
+            onTap: () async {
+              DateTime? pickedDate = await showDatePicker(
+                context: context,
+                initialDate: DateTime.now(),
+                firstDate: DateTime(2000),
+                lastDate: DateTime(2100),
+              );
+              if (pickedDate != null) {
+                String formattedDate =
+                    "${pickedDate.day}-${pickedDate.month}-${pickedDate.year}";
+                addVehicleProvider.dateOfInwardController.text = formattedDate;
+              }
+            },
           ),
         ),
         SizedBox(height: height * 0.02),
 
         /// Vehicle No
-        Padding(
-          padding: const EdgeInsets.only(left: 16, right: 16),
-          child: Text(
-            'Vehicle No',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
+        buildHeading(heading: 'Vehicle No'),
         SizedBox(height: height * 0.01),
         Padding(
           padding: const EdgeInsets.only(left: 16, right: 16),
@@ -63,17 +58,7 @@ class BasicDetailsFromOne extends StatelessWidget {
         SizedBox(height: height * 0.02),
 
         /// Accidental No
-        Padding(
-          padding: const EdgeInsets.only(left: 16, right: 16),
-          child: Text(
-            'Service Type',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
+        buildHeading(heading: 'Service Type'),
         SizedBox(height: height * 0.01),
         Container(
           margin: EdgeInsets.only(left: 16, right: 16),
@@ -134,17 +119,7 @@ class BasicDetailsFromOne extends StatelessWidget {
         SizedBox(height: height * 0.02),
 
         /// Driver Voice
-        Padding(
-          padding: const EdgeInsets.only(left: 16, right: 16),
-          child: Text(
-            'Driver voice',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
+        buildHeading(heading: 'Driver voice'),
         SizedBox(height: height * 0.01),
         Padding(
           padding: const EdgeInsets.only(left: 16, right: 16),
@@ -157,17 +132,7 @@ class BasicDetailsFromOne extends StatelessWidget {
         SizedBox(height: height * 0.02),
 
         /// Mechanics attending the vehicle
-        Padding(
-          padding: const EdgeInsets.only(left: 16, right: 16),
-          child: Text(
-            'Mechanics Attending The Vehicle',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
+        buildHeading(heading: 'Mechanics Attending The Vehicle'),
         SizedBox(height: height * 0.01),
         Container(
           margin: EdgeInsets.only(left: 16, right: 16),
@@ -205,17 +170,7 @@ class BasicDetailsFromOne extends StatelessWidget {
         SizedBox(height: height * 0.02),
 
         /// Type
-        Padding(
-          padding: const EdgeInsets.only(left: 16, right: 16),
-          child: Text(
-            'Type',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
+        buildHeading(heading: 'Type'),
         SizedBox(height: height * 0.01),
         Container(
           margin: EdgeInsets.only(left: 16, right: 16),
@@ -276,17 +231,51 @@ class BasicDetailsFromOne extends StatelessWidget {
 
         /// Location
         if (addVehicleProvider.selectedType == 'BREAKDOWN') ...[
-          Padding(
-            padding: const EdgeInsets.only(left: 16, right: 16),
-            child: Text(
-              'Location',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
+          buildHeading(heading: 'Email Screenshot'),
+          SizedBox(height: height * 0.01),
+          Consumer<AddVehicleProvider>(
+              builder: (context, addVehicleProvider, child) {
+            return InkWell(
+              onTap: () {
+                showImagePickerBottomSheet(
+                  context: context,
+                  onCameraTap: () => addVehicleProvider
+                      .emailScreenShotPictureImagePicker(ImageSource.camera),
+                  onGalleryTap: () => addVehicleProvider
+                      .emailScreenShotPictureImagePicker(ImageSource.gallery),
+                );
+              },
+              child: Container(
+                height: height * 0.25,
+                margin: EdgeInsets.symmetric(horizontal: 16),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(14),
+                  border: Border.all(
+                    color: AppColor.subItemColor,
+                  ),
+                ),
+                child: addVehicleProvider.clusterMeterPictureImage != null
+                    ? ClipRRect(
+                        borderRadius: BorderRadius.circular(14),
+                        child: Image.file(
+                          addVehicleProvider.emailScreenShotPictureImage!,
+                          width: double.infinity,
+                          filterQuality: FilterQuality.high,
+                          fit: BoxFit.fill,
+                        ),
+                      )
+                    : Center(
+                        child: Icon(
+                          Icons.add_photo_alternate,
+                          color: Colors.white,
+                          size: 30,
+                        ),
+                      ),
               ),
-            ),
-          ),
+            );
+          }),
+          SizedBox(height: height * 0.02),
+          buildHeading(heading: 'Location'),
           SizedBox(height: height * 0.01),
           Padding(
             padding: const EdgeInsets.only(left: 16, right: 16),
@@ -301,17 +290,7 @@ class BasicDetailsFromOne extends StatelessWidget {
 
         /// AT - SITE
         if (addVehicleProvider.selectedType == 'AT-SITE') ...[
-          Padding(
-            padding: const EdgeInsets.only(left: 16, right: 16),
-            child: Text(
-              'At-Site',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
+          buildHeading(heading: 'At-Site'),
           SizedBox(height: height * 0.01),
           Padding(
             padding: const EdgeInsets.only(left: 16, right: 16),
@@ -324,6 +303,22 @@ class BasicDetailsFromOne extends StatelessWidget {
           SizedBox(height: height * 0.02),
         ],
       ],
+    );
+  }
+
+  /// Widget for Heading
+  Widget buildHeading({required String heading}) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 16, right: 16),
+      child: Text(
+        heading,
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+          fontFamily: 'Lato',
+        ),
+      ),
     );
   }
 }

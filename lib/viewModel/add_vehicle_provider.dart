@@ -49,6 +49,19 @@ class AddVehicleProvider with ChangeNotifier {
   ];
   List<String> get dropdownType => _dropdownTypes;
 
+  File? _emailScreenShotPictureImage;
+  File? get emailScreenShotPictureImage => _emailScreenShotPictureImage;
+
+  // Function to pick cluster meter image
+  Future<void> emailScreenShotPictureImagePicker(ImageSource source) async {
+    final pickedFile = await _picker.pickImage(source: source);
+
+    if (pickedFile != null) {
+      _emailScreenShotPictureImage = File(pickedFile.path);
+      notifyListeners(); // Notify UI to update
+    }
+  }
+
   final TextEditingController _locationController = TextEditingController();
   TextEditingController get locationController => _locationController;
 
@@ -181,4 +194,300 @@ class AddVehicleProvider with ChangeNotifier {
       TextEditingController();
   TextEditingController get deputationChargesController =>
       _deputationChargesController;
+
+  /// --------------- Accidental Work ----------------
+  final TextEditingController _policyNoController = TextEditingController();
+  TextEditingController get policyNoController => _policyNoController;
+
+  final TextEditingController _insuredNameOwnerController =
+      TextEditingController();
+  TextEditingController get insuredNameOwnerController =>
+      _insuredNameOwnerController;
+
+  final TextEditingController _insurancePolicyInsurersController =
+      TextEditingController();
+  TextEditingController get insurancePolicyInsurersController =>
+      _insurancePolicyInsurersController;
+
+  final TextEditingController _periodOfInsuranceController =
+      TextEditingController();
+  TextEditingController get periodOfInsuranceController =>
+      _periodOfInsuranceController;
+
+  final TextEditingController _idvAmountController = TextEditingController();
+  TextEditingController get idvAmountController => _idvAmountController;
+
+  final TextEditingController _chassisNoController = TextEditingController();
+  TextEditingController get chassisNoController => _chassisNoController;
+
+  final TextEditingController _engineNoController = TextEditingController();
+  TextEditingController get engineNoController => _engineNoController;
+
+  final TextEditingController _makeVariantModelColorController =
+      TextEditingController();
+  TextEditingController get makeVariantModelColorController =>
+      _makeVariantModelColorController;
+
+  final TextEditingController _weatherVehicleisNationalPermitController =
+      TextEditingController();
+  TextEditingController get weatherVehicleisNationalPermitController =>
+      _weatherVehicleisNationalPermitController;
+
+  String?
+      _selectedWhetherVehicleNoEngineNoAndChassisNoCorrectAndMentionedInPolicy;
+  String?
+      get selectedWhetherVehicleNoEngineNoAndChassisNoCorrectAndMentionedInPolicy =>
+          _selectedWhetherVehicleNoEngineNoAndChassisNoCorrectAndMentionedInPolicy;
+
+  final List<String>
+      _whetherVehicleNoEngineNoAndChassisNoCorrectAndMentionedInPolicyValue = [
+    'Yes',
+    'No'
+  ];
+  List<String>
+      get whetherVehicleNoEngineNoAndChassisNoCorrectAndMentionedInPolicyValue =>
+          _whetherVehicleNoEngineNoAndChassisNoCorrectAndMentionedInPolicyValue;
+
+  /// set WhetherVehicleNoEngineNoAndChassisNoCorrectAndMentionedInPolicyValue
+  void setWhetherVehicleNoEngineNoAndChassisNoCorrectAndMentionedInPolicyValue(
+      String
+          selectedWhetherVehicleNoEngineNoAndChassisNoCorrectAndMentionedInPolicy) {
+    _selectedWhetherVehicleNoEngineNoAndChassisNoCorrectAndMentionedInPolicy =
+        selectedWhetherVehicleNoEngineNoAndChassisNoCorrectAndMentionedInPolicy;
+    notifyListeners();
+  }
+
+  final TextEditingController _highLightController = TextEditingController();
+  TextEditingController get highLightController => _highLightController;
+
+  final TextEditingController _accidentDateController = TextEditingController();
+  TextEditingController get accidentDateController => _accidentDateController;
+
+  final TextEditingController _accidentTimeController = TextEditingController();
+  TextEditingController get accidentTimeController => _accidentTimeController;
+
+  final TextEditingController _accidentLocationController =
+      TextEditingController();
+  TextEditingController get accidentLocationController =>
+      _accidentLocationController;
+
+  final TextEditingController _causeOfLossController = TextEditingController();
+  TextEditingController get causeOfLossController => _causeOfLossController;
+
+  final TextEditingController _reasonOfAccidentCauseOfLoss =
+      TextEditingController();
+  TextEditingController get reasonOfAccidentCauseOfLoss =>
+      _reasonOfAccidentCauseOfLoss;
+
+  final List<String> _VehicleCameToWorkShopByCraneValue = ['Yes', 'No'];
+  List<String> get vehicleCameToWorkShopByCraneValue =>
+      _VehicleCameToWorkShopByCraneValue;
+
+  String? _selectedVehicleCameToWorkShopByCrane;
+  String? get selectedVehicleCameToWorkShopByCrane =>
+      _selectedVehicleCameToWorkShopByCrane;
+
+  /// set WhetherVehicleNoEngineNoAndChassisNoCorrectAndMentionedInPolicyValue
+  void setSelectedVehicleCameToWorkShopByCrane(
+      String selectedVehicleCameToWorkShopByCrane) {
+    _selectedVehicleCameToWorkShopByCrane =
+        selectedVehicleCameToWorkShopByCrane;
+    notifyListeners();
+  }
+
+  File? _craneBillPostAccidentPicture;
+  File? get craneBillPostAccidentPicture => _craneBillPostAccidentPicture;
+
+  // Function to pick vehicle picture from front image
+  Future<void> craneBillPostAccidentPictureImagePicker(
+      ImageSource source) async {
+    final pickedFile = await _picker.pickImage(source: source);
+
+    if (pickedFile != null) {
+      _craneBillPostAccidentPicture = File(pickedFile.path);
+      notifyListeners(); // Notify UI to update
+    }
+  }
+
+  final TextEditingController _driverNameController = TextEditingController();
+  TextEditingController get driverNameController => _driverNameController;
+
+  final TextEditingController _licenseNoController = TextEditingController();
+  TextEditingController get licenseNoController => _licenseNoController;
+
+  final TextEditingController _driverLicenseIssuingAuthorityController =
+      TextEditingController();
+  TextEditingController get driverLicenseIssuingAuthorityController =>
+      _driverLicenseIssuingAuthorityController;
+
+  String? _selectedInjusryDriverValue;
+  String? get selectedInjusryDriverValue => _selectedInjusryDriverValue;
+
+  final List<String> _injusryDriverValue = ['Yes', 'No'];
+  List<String> get injusryDriverValue => _injusryDriverValue;
+
+  /// set injusry Drive rValue
+  void setInjusryDriverValue(String injusryDriverValue) {
+    _selectedInjusryDriverValue = injusryDriverValue;
+    notifyListeners();
+  }
+
+  File? _injusryDriverPicture;
+  File? get injusryDriverPicture => _injusryDriverPicture;
+
+  // Function to pick vehicle picture from front image
+  Future<void> injusryDriverPictureImagePicker(ImageSource source) async {
+    final pickedFile = await _picker.pickImage(source: source);
+
+    if (pickedFile != null) {
+      _injusryDriverPicture = File(pickedFile.path);
+      notifyListeners(); // Notify UI to update
+    }
+  }
+
+  String? _selectedLoadedOrNotValue;
+  String? get selectedLoadedOrNotValue => _selectedLoadedOrNotValue;
+
+  final List<String> _loadedOrNotValue = ['Yes', 'No'];
+  List<String> get loadedOrNotValue => _loadedOrNotValue;
+
+  /// set injusry Drive rValue
+  void setLoadedOrNotValue(String loadedOrNot) {
+    _selectedLoadedOrNotValue = loadedOrNot;
+    notifyListeners();
+  }
+
+  File? _loadedDocumentsPicture;
+  File? get loadedDocumentsPicture => _loadedDocumentsPicture;
+
+  // Function to pick vehicle picture from front image
+  Future<void> loadedDocumentsPictureImagePicker(ImageSource source) async {
+    final pickedFile = await _picker.pickImage(source: source);
+
+    if (pickedFile != null) {
+      _loadedDocumentsPicture = File(pickedFile.path);
+      notifyListeners(); // Notify UI to update
+    }
+  }
+
+  String? _selectedPoliceActionValue;
+  String? get selectedPoliceActionValue => _selectedPoliceActionValue;
+
+  final List<String> _policeActionValueValue = ['Yes', 'No'];
+  List<String> get policeActionValueValue => _policeActionValueValue;
+
+  /// set police action Value
+  void setPoliceActionValue(String policeActionValue) {
+    _selectedPoliceActionValue = policeActionValue;
+    notifyListeners();
+  }
+
+  File? _policeActionPicture;
+  File? get policeActionPicture => _policeActionPicture;
+
+  // Function to pick vehicle picture from front image
+  Future<void> policeActionPicturePictureImagePicker(ImageSource source) async {
+    final pickedFile = await _picker.pickImage(source: source);
+
+    if (pickedFile != null) {
+      _policeActionPicture = File(pickedFile.path);
+      notifyListeners(); // Notify UI to update
+    }
+  }
+
+  String? _selectedThirdPartyLossInjuriesValue;
+  String? get selectedThirdPartyLossInjuriesValue =>
+      _selectedThirdPartyLossInjuriesValue;
+
+  final List<String> _thirdPartyLossInjuriesValue = ['Yes', 'No'];
+  List<String> get thirdPartyLossInjuriesValue => _thirdPartyLossInjuriesValue;
+
+  /// set third party loss injuries Value
+  void setThirdPartyLossinjuriesValue(String thirdPartyValue) {
+    _selectedThirdPartyLossInjuriesValue = thirdPartyValue;
+    notifyListeners();
+  }
+
+  File? _registrationCertificatePicture;
+  File? get registrationCertificatePicture => _registrationCertificatePicture;
+
+  // Function to pick vehicle picture from front image
+  Future<void> registrationCertificatePictureImagePicker(
+      ImageSource source) async {
+    final pickedFile = await _picker.pickImage(source: source);
+
+    if (pickedFile != null) {
+      _registrationCertificatePicture = File(pickedFile.path);
+      notifyListeners(); // Notify UI to update
+    }
+  }
+
+  File? _registrationCertificateOnlineVerifiedCopyPicture;
+  File? get registrationCertificateOnlineVerifiedCopyPicture =>
+      _registrationCertificateOnlineVerifiedCopyPicture;
+
+  // Function to pick vehicle picture from front image
+  Future<void> registrationCertificateOnlineVerifiedCopyPictureImagePicker(
+      ImageSource source) async {
+    final pickedFile = await _picker.pickImage(source: source);
+
+    if (pickedFile != null) {
+      _registrationCertificateOnlineVerifiedCopyPicture = File(pickedFile.path);
+      notifyListeners(); // Notify UI to update
+    }
+  }
+
+  File? _insurancePolicyPicture;
+  File? get insurancePolicyPicture => _insurancePolicyPicture;
+
+  // Function to pick vehicle picture from front image
+  Future<void> insurancePolicyPictureImagePicker(ImageSource source) async {
+    final pickedFile = await _picker.pickImage(source: source);
+
+    if (pickedFile != null) {
+      _insurancePolicyPicture = File(pickedFile.path);
+      notifyListeners(); // Notify UI to update
+    }
+  }
+
+  File? _drivingLicensePicture;
+  File? get drivingLicensePicture => _drivingLicensePicture;
+
+  // Function to pick vehicle picture from front image
+  Future<void> drivingLicensePictureImagePicker(ImageSource source) async {
+    final pickedFile = await _picker.pickImage(source: source);
+
+    if (pickedFile != null) {
+      _drivingLicensePicture = File(pickedFile.path);
+      notifyListeners(); // Notify UI to update
+    }
+  }
+
+  File? _drivingLicenseOnlineVerifiedCopyPicture;
+  File? get drivingLicenseOnlineVerifiedCopyPicture =>
+      _drivingLicenseOnlineVerifiedCopyPicture;
+
+  // Function to Driving License Online Verified Copy Picture image
+  Future<void> drivingLicenseOnlineVerifiedCopyPictureImagePicker(
+      ImageSource source) async {
+    final pickedFile = await _picker.pickImage(source: source);
+
+    if (pickedFile != null) {
+      _drivingLicenseOnlineVerifiedCopyPicture = File(pickedFile.path);
+      notifyListeners(); // Notify UI to update
+    }
+  }
+
+  File? _permitAuthorisationPicture;
+  File? get permitAuthorisationPicture => _permitAuthorisationPicture;
+
+  // Function to Driving License Online Verified Copy Picture image
+  Future<void> permitAuthorisationPictureImagePicker(ImageSource source) async {
+    final pickedFile = await _picker.pickImage(source: source);
+
+    if (pickedFile != null) {
+      _permitAuthorisationPicture = File(pickedFile.path);
+      notifyListeners(); // Notify UI to update
+    }
+  }
 }

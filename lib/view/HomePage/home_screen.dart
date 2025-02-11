@@ -30,8 +30,8 @@ class HomeScreen extends StatelessWidget {
                 duration: Duration(milliseconds: 400),
                 margin: EdgeInsets.symmetric(
                     vertical: value.showMenu
-                        ? MediaQuery.of(context).size.height / 13
-                        : MediaQuery.of(context).size.height / 13),
+                        ? MediaQuery.of(context).size.height / 11
+                        : MediaQuery.of(context).size.height / 12),
                 width: value.showMenu ? 210 : 80,
                 decoration: BoxDecoration(
                   color: Colors.black.withAlpha(80),
@@ -43,7 +43,7 @@ class HomeScreen extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    SizedBox(height: 30),
+                    SizedBox(height: 40),
 
                     /// Icon button
                     InkWell(
@@ -70,51 +70,60 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(height: 40),
+                    SizedBox(height: 25),
 
                     /// Home Button
-                    menuButtons(icon: Icons.home_outlined, label: 'Dashboard'),
+                    menuButtons(icon: Icons.home_outlined, label: 'Home'),
                     SizedBox(height: 20),
 
                     /// Insurance button
                     menuButtons(
                         icon: Icons.insert_drive_file_outlined,
-                        label: 'Insurance'),
+                        label: 'Employee Data'),
                     SizedBox(height: 20),
 
                     /// Driver Button
                     menuButtons(
-                        icon: Icons.people_alt_outlined, label: 'Driver'),
+                        icon: Icons.people_alt_outlined,
+                        label: 'Attend Vehicle-Entry'),
                     SizedBox(height: 20),
 
                     /// Vehicles Button
                     menuButtons(
-                        icon: Icons.directions_car_outlined, label: 'Vehicles'),
+                        icon: Icons.directions_car_outlined,
+                        label: 'Work in Progress Vehicles (Pending Vehicles)'),
                     SizedBox(height: 20),
 
                     /// Credentials Button
-                    menuButtons(icon: Icons.file_present, label: 'Credentials'),
+                    menuButtons(
+                        icon: Icons.file_present,
+                        label: 'Report-Workshop Vehicles'),
                     SizedBox(height: 20),
 
                     /// Authorizations Button
                     menuButtons(
                         icon: Icons.verified_user_outlined,
-                        label: 'Authorizations'),
+                        label: 'Report-Accidental Vehicles'),
                     SizedBox(height: 20),
 
                     /// Issues Button
                     menuButtons(
-                        icon: Icons.info_outline_rounded, label: 'Issues'),
+                        icon: Icons.info_outline_rounded,
+                        label: 'Report-At-Site Vehicles'),
                     SizedBox(height: 20),
 
                     /// Trip requests Button
                     menuButtons(
                         icon: Icons.location_on_outlined,
-                        label: 'Trip requests'),
+                        label: 'Report-Breakdown Vehicles'),
                     SizedBox(height: 20),
 
                     /// Open trips Button
-                    menuButtons(icon: Icons.map_outlined, label: 'Open trips'),
+                    menuButtons(icon: Icons.map_outlined, label: 'Master Data'),
+                    SizedBox(height: 20),
+
+                    /// Stock Button
+                    menuButtons(icon: Icons.inventory, label: 'Stock'),
                     SizedBox(height: 20),
                   ],
                 ),
@@ -139,7 +148,7 @@ class HomeScreen extends StatelessWidget {
           value.setSelectedMenu(label);
         },
         child: Container(
-          margin: EdgeInsets.only(left: value.showMenu ? 18 : 18, right: 18),
+          margin: EdgeInsets.only(left: value.showMenu ? 10 : 10, right: 18),
           padding: EdgeInsets.only(
               top: 8,
               bottom: 8,
@@ -158,7 +167,7 @@ class HomeScreen extends StatelessWidget {
               Icon(
                 icon,
                 color: Colors.white,
-                size: 28,
+                size: 26,
               ),
               SizedBox(width: value.isRenderText ? 8 : 0),
               AnimatedOpacity(
@@ -167,11 +176,12 @@ class HomeScreen extends StatelessWidget {
                 opacity: value.isRenderText ? 1.0 : 0.0,
                 child: SizedBox(
                   width: value.isRenderText ? 120 : 0,
+                  height: 20,
                   child: Text(
                     label,
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 16,
+                      fontSize: 14,
                       fontWeight: FontWeight.w600,
                       fontFamily: 'Lato',
                     ),

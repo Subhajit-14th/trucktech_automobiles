@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:trucktech_automobiles/view/Dashboard/AddVehicles/Accidental/accidental_screen.dart';
 import 'package:trucktech_automobiles/view/Dashboard/AddVehicles/AtSiteWork/at_site_work_field_screen.dart';
 import 'package:trucktech_automobiles/view/Dashboard/AddVehicles/BreakDown/breakdown_field_screen.dart';
 import 'package:trucktech_automobiles/view/Dashboard/AddVehicles/WorkShop/workshop_field_screen.dart';
@@ -34,7 +35,7 @@ class BasicDetailsFormThree extends StatelessWidget {
                 ? BreakdownFieldScreen()
                 : context.read<AddVehicleProvider>().selectedType == "AT-SITE"
                     ? AtSiteWorkFieldScreen()
-                    : Container(),
+                    : AccidentalScreen(),
       ],
     );
   }

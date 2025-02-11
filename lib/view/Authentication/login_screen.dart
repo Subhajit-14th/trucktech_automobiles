@@ -145,11 +145,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Row(
                         children: [
                           Expanded(
-                              child: tabForUserType(
-                                  tabName: 'Supervisor', index: 0)),
+                              child:
+                                  tabForUserType(tabName: 'Admin', index: 0)),
                           Expanded(
                               child: tabForUserType(
-                                  tabName: 'Mechanic', index: 1)),
+                                  tabName: 'Supervisor', index: 1)),
+                          Expanded(
+                              child: tabForUserType(
+                                  tabName: 'Mechanic', index: 2)),
                           // InkWell(
                           //     onTap: () {
                           //       authProvider.setTabIndex(2);

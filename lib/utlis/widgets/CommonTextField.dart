@@ -6,20 +6,24 @@ class CommonTextField extends StatelessWidget {
       {super.key,
       required this.labelText,
       required this.hintText,
-      required this.controller});
+      required this.controller,
+      this.onTap});
 
   final TextEditingController controller;
   final String labelText;
   final String hintText;
+  final Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
       cursorColor: AppColor.textColor,
+      readOnly: onTap == null ? false : true,
       style: const TextStyle(
         color: AppColor.textColor,
       ),
+      onTap: onTap,
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: const TextStyle(

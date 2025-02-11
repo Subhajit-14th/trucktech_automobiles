@@ -7,17 +7,21 @@ import 'package:trucktech_automobiles/viewModel/home_provider.dart';
 
 class AnimatedContainerWithRowColumnAnimation extends StatelessWidget {
   const AnimatedContainerWithRowColumnAnimation(
-      {super.key, required this.icon, required this.label});
+      {super.key,
+      required this.icon,
+      required this.label,
+      required this.itemCount});
 
   final IconData icon;
   final String label;
+  final int itemCount;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 150,
+      height: 160,
       width: double.infinity,
-      margin: EdgeInsets.only(right: 16),
+      margin: EdgeInsets.only(right: 16, bottom: 16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
         border: Border.all(
@@ -43,59 +47,46 @@ class AnimatedContainerWithRowColumnAnimation extends StatelessWidget {
                 transitionBuilder: (child, animation) {
                   return FadeTransition(opacity: animation, child: child);
                 },
-                child: context.watch<HomeProvider>().showMenu
-                    ? Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        spacing: 16,
-                        children: [
-                          Icon(
-                            icon,
-                            color: Colors.white,
-                            size: 28,
-                          ),
-                          AnimatedDefaultTextStyle(
-                            duration: Duration(milliseconds: 300),
-                            curve: Curves.easeInOut,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: context.watch<HomeProvider>().showMenu
-                                  ? 16
-                                  : 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            child: Text(
-                              label,
-                            ),
-                          ),
-                        ],
-                      )
-                    : Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        spacing: 16,
-                        children: [
-                          Icon(
-                            icon,
-                            color: Colors.white,
-                            size: 28,
-                          ),
-                          AnimatedDefaultTextStyle(
-                            duration: Duration(milliseconds: 300),
-                            curve: Curves.easeInOut,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: context.watch<HomeProvider>().showMenu
-                                  ? 16
-                                  : 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            child: Text(
-                              label,
-                            ),
-                          ),
-                        ],
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  spacing: 16,
+                  children: [
+                    Icon(
+                      icon,
+                      color: Colors.white,
+                      size: 28,
+                    ),
+                    AnimatedDefaultTextStyle(
+                      duration: Duration(milliseconds: 300),
+                      curve: Curves.easeInOut,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize:
+                            context.watch<HomeProvider>().showMenu ? 14 : 16,
+                        fontWeight: FontWeight.bold,
                       ),
+                      child: Text(
+                        label,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 15,
+                          fontFamily: 'Lato',
+                        ),
+                      ),
+                    ),
+                    Text(
+                      '($itemCount)',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Lato',
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

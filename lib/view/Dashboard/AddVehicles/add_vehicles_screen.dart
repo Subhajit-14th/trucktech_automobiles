@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:trucktech_automobiles/utlis/assets/app_colors.dart';
 import 'package:trucktech_automobiles/utlis/widgets/CommonButton.dart';
 import 'package:trucktech_automobiles/view/Dashboard/AddVehicles/basic_details_form_one.dart';
@@ -21,6 +22,22 @@ class _AddVehiclesScreenState extends State<AddVehiclesScreen> {
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: AppColor.itemsColor,
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        iconTheme: IconThemeData(
+          color: Colors.white,
+        ),
+        systemOverlayStyle: SystemUiOverlayStyle.light,
+        title: Text(
+          'Add Vehicle',
+          style: TextStyle(
+            color: Colors.white,
+            fontFamily: 'Lato',
+          ),
+        ),
+        elevation: 0,
+      ),
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
@@ -39,7 +56,7 @@ class _AddVehiclesScreenState extends State<AddVehiclesScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: MediaQuery.of(context).size.height * 0.04),
+              SizedBox(height: height * 0.08),
 
               /// Custom Stepper Row
               Padding(
